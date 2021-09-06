@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>What's for dinner?</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lazydinners.css">
+    <link rel="icon" type="image/png" href="icon.png">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <span class="navbar-brand">Nick's Meal Generator</span>
+    </nav>
+    <div class = "countbox">
+        <h3>Meal choices: <span data-bind = "text: recipeName"></span></h3>
+    </div>
+    <div class = "filterbox d-none">
+        <form data-bind = "submit: filterRecipes">
+            <div class = "filter-group">
+                <label for="recipeName">Meal Name:</label>
+                <input type = "recipeName" class = "form-control" id="recipeName" data-bind = "value: recipeName">
+            </div>
+            <div class = "filter-group">
+                <label for="recipeIngredients">Ingredients:</label>
+                <input type = "recipeIngredients" class = "form-control" id="ingredients" data-bind = "value: recipeIngredients">
+            </div>
+			<div class = "filter-group">
+                <label for="recipeIngredients">Side Ideas:</label>
+                <input type = "recipeIngredients" class = "form-control" id="side_ideas" data-bind = "value: recipeIngredients">
+            </div>
+            <div class = "filter-group">
+                <label for="recipeDifficulty">Difficulty:</label>
+                <input type = "recipeDifficulty" class = "form-control" id="difficulty" data-bind = "value: recipeDifficulty">
+            </div>
+            <button class = "btn btn-primary mt-2" type="submit">Filter</button> 
+        </form>
+    </div>
+    <div data-bind="loading-animation: IsLoading" class = "loadbox"></div>
+    <div data-bind = "class: tableClass" class = "d-none">
+        <div class = "table"> 
+            <table>
+                <tr class = "thead-dark text-center">
+                    <th>Meal</th>
+                    <th>Ingredients</th>
+					<th>Side Ideas</th>
+                    <th>Difficulty</th>
+                </tr>
+            <!-- ko foreach: recipes -->
+                <tr>
+                    <td class = "text-center"><span data-bind = "text: $data.name"></span></td>
+                    <td class = "text-center"><span data-bind = "text: $data.ingredients"></span></td>
+					<td class = "text-center"><span data-bind = "text: $data.side_ideas"></span></td>
+                    <td class = "text-center"><span data-bind = "text: $data.difficulty"></span></td>
+                </tr>
+            <!-- /ko -->
+            </table>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="lazydinners.js"></script>
+</body>
+
+</html>
